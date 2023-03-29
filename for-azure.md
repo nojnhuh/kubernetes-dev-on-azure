@@ -1,3 +1,26 @@
+# Install and login to the `az` CLI
+
+```
+# assuming you have az cli installed on the newly created dev machine
+#if not, then run the following:
+# sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev
+# curl -L https://aka.ms/InstallAzureCli | bash 
+```
+
+When `az login` does not detect a local web browser to open, it will use device login which invokes
+the full 2FA flow and only lasts a few hours. Logging in with OAuth authorization codes lasts much
+longer but requires a web browser. VSCode's Remote SSH plugin provides a wrapper to open the local
+browser from its built-in terminal:
+
+1. Connect to the VM from VSCode.
+
+2. From VSCode's built-in terminal, run `az login`.
+
+3. After authorizing, you will be redirected to a `localhost` URL that will fail
+   to connect. Use VSCode to forward the port in the URL then refresh the page.
+   You should now be logged in.
+
+
 # Bootsrap an acs-engine Kubernetes Cluster Using Your Hyperkube Image
 
 1. Get acs-engine and build it
@@ -40,13 +63,6 @@ sed -i "s/gcrio\.azureedge\.net\/google_containers\/hyperkube-amd64:v1\.6\.6/<<R
 3. Deploy ARM Template 
 
 ```
-# assuming you have az cli installed on the newly created dev machine
-#if not, then run the following:
-# sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev
-# curl -L https://aka.ms/InstallAzureCli | bash 
-# login via az login
-
-
 # Create the group  
 az group create --name funkycluster --location centralus
 
